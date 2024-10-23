@@ -15,7 +15,7 @@ class Facture(models.Model):
     # statut = models.CharField(max_length=20, choices=[('payée', 'Payée'), ('en_attente', 'En attente'), ('annulée', 'Annulée')])
 
     def __str__(self):
-        return f"Facture {self.id} - {self.client} - {self.montant}€"
+        return f"Facture {self.id} - {self.client} - {self.ttc}€ en date du: {self.date}"
 
     class Meta:
         ordering = ['-date']  # This will order invoices by date, most recent first

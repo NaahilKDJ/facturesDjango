@@ -1,37 +1,50 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Facture List</h2>
-<table class="table is-hoverable is-vcentered has-text-centered">
-    <thead>
-        <tr>
-            <th>N°Facture</th>
-            <th>Nom Client</th>
-            <th>Article Name</th>
-            <th>Quantity</th>
-            <th>Montant HT</th>
-            <th>Montant TTC</th>
-            <th>Date</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for facture in factures %}
-        <tr>
-            <td>{{ facture.id }}</td>
-            <td>{{ facture.client }}</td>
-            <td>{{ facture.article_name }}</td>
-            <td>{{ facture.article_quantity }}</td>
-            <td>{{ facture.ht }}</td>
-            <td>{{ facture.ttc }}</td>
-            <td>{{ facture.date }}</td>
-            <td>
-                <a href="{% url 'facture-update' facture.pk %}">Edit</a> |
-                <a href="{% url 'facture-delete' facture.pk %}">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<a href="{% url 'facture-create' %}">Create New Facture</a>
+<br> <br>
+<div class="box m-auto" style="width:fit-content;">
+    <h2 class="title is-size-2"> Factures List </h2>
+    <table class="table is-hoverable is-vcentered has-text-centered m-auto">
+        <thead>
+            <tr>
+                <th> N°Facture      </th>
+                <th> Nom Client     </th>
+                <th> Article Name   </th>
+                <th> Quantity       </th>
+                <th> Montant HT     </th>
+                <th> Montant TTC    </th>
+                <th> Date           </th>
+                <th>                </th>
+                <th>                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for facture in factures %}
+            <tr>
+                <td>
+                    <a href="{% url 'facture-detail' facture.pk %}"> {{ facture.id }} </a>
+                </td>
+                <td> {{ facture.client }}           </td>
+                <td> {{ facture.article_name }}     </td>
+                <td> {{ facture.article_quantity }} </td>
+                <td> {{ facture.ht }} €             </td>
+                <td> {{ facture.ttc }} €            </td>
+                <td> {{ facture.date }}             </td>
+                <td>
+                    <a href="{% url 'facture-update' facture.pk %}"> Edit   </a>
+                </td>
+                <td>
+                    <a href="{% url 'facture-delete' facture.pk %}"> Delete </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        <br>
+    <div class="m-auto" style="width:fit-content">
+        <a href="{% url 'facture-create' %}" class="button is-outlined is-link is-small">Create New Facture</a>
+    </div>
+</div>
+<br> <br>
+
 {% endblock %}

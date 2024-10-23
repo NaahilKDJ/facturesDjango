@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Facture Details</h2>
+    <p>Client: {{ facture.client }}</p>
+    <p>Article Name: {{ facture.article_name }}</p>
+    <p>Quantity: {{ facture.article_quantity }}</p>
+    <p>Montant HT: {{ facture.ht }}</p>
+    <p>Montant TTC: {{ facture.ttc }}</p>
+    <p>Date: {{ facture.date }}</p>
+    <a href="{% url 'facture-update' facture.pk %}">Edit</a>
+    <a href="{% url 'facture-delete' facture.pk %}">Delete</a>
+    <a href="{% url 'facture-list' %}">Back to List</a>
+{% endblock %}
+

@@ -10,18 +10,28 @@
 </head>
 <body class="">
     <header>
-        <h1 class="title">Facture Management System</h1>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="">
+                    
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <a href="{% url 'facture-list' %}" class="navbar-item"> Factures </a>
+            </div>
+        </nav>
+
+        <h1 class="title has-text-centered">Facture Management System</h1>
     </header>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <ul>
-            <li><a href="{% url 'facture-list' %}">Factures</a></li>
-        </ul>
-    </nav>
+
     <main>
         {% block content %}
         
         {% endblock %}
     </main>
+
+    <br> <br>
+
     <footer>
         <p>&copy; 2023 Facture Management</p>
     </footer>

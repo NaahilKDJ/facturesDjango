@@ -6,11 +6,12 @@ class FactureForm(forms.ModelForm):
         model = Facture
         fields = ['client', 'article_name', 'article_quantity', 'ttc', 'ht', 'date']
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date'}),
-            'client': forms.TextInput(attrs={'class': 'form-control'}),
-            'article_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'article_quantity': forms.NumberInput(attrs={'class': 'form-control'}),
-            'ttc': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01'}),
+            'Date'              : forms.DateInput(attrs={'type': 'date', 'class': 'form-control input'}),
+            'Client'            : forms.TextInput(attrs={'class': 'form-control input'}),
+            'Article Name'      : forms.TextInput(attrs={'class': 'form-control input'}),
+            'Article Quantity'  : forms.NumberInput(attrs={'class': 'form-control input'}),
+            'TTC'               : forms.NumberInput(attrs={'class': 'form-control input', 'step': '0.01'}),
+            'HT'                : forms.NumberInput(attrs={'class': 'form-control input', 'step': '0.01'}),
         }
 
 

@@ -1,11 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Facture</h2>
-<form method="post">
+<br> <br>
+
+    <br>
+<form method="post" class="box m-auto is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-baseline" style="width:fit-content;">
+    <h2 class="title is-size-2 has-text-centered">{% if form.instance.pk %} Edit {% else %} Create {% endif %} Facture </h2>
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="button is-primary">Save</button>
+        <br>
+    <div class="m-auto" style="width:fit-content;">
+        <button type="submit" class="button is-primary is-small"> Save </button>
+    </div>
 </form>
-<a href="{% url 'facture-list' %}">Back to list</a>
+    <br> <br>
+<div class="" style="width:fit-content">
+    <a href="{% url 'facture-list' %}" class="button is-outlined is-link is-small">Back to list</a>
+</div>
+
 {% endblock %}
