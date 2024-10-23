@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -7,15 +8,16 @@
     <table class="table is-hoverable is-vcentered has-text-centered m-auto">
         <thead>
             <tr>
-                <th> N°Facture      </th>
-                <th> Nom Client     </th>
-                <th> Article Name   </th>
-                <th> Quantity       </th>
-                <th> Montant HT     </th>
-                <th> Montant TTC    </th>
-                <th> Date           </th>
-                <th>                </th>
-                <th>                </th>
+                <th> N°Facture          </th>
+                <th> Nom Client         </th>
+                <th> Article Name       </th>
+                <th> Quantity           </th>
+                <th> Montant HT         </th>
+                <th> Montant TTC        </th>
+                <th> Statut Paiement    </th>
+                <th> Date               </th>
+                <th>                    </th>
+                <th>                    </th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +31,7 @@
                 <td> {{ facture.article_quantity }} </td>
                 <td> {{ facture.ht }} €             </td>
                 <td> {{ facture.ttc }} €            </td>
+                <td> {{ facture.paid }}             </td>
                 <td> {{ facture.date }}             </td>
                 <td>
                     <a href="{% url 'facture-update' facture.pk %}"> Edit   </a>

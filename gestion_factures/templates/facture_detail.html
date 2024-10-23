@@ -1,15 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Facture Details</h2>
-    <p>Client: {{ facture.client }}</p>
-    <p>Article Name: {{ facture.article_name }}</p>
-    <p>Quantity: {{ facture.article_quantity }}</p>
-    <p>Montant HT: {{ facture.ht }}</p>
-    <p>Montant TTC: {{ facture.ttc }}</p>
-    <p>Date: {{ facture.date }}</p>
-    <a href="{% url 'facture-update' facture.pk %}">Edit</a>
-    <a href="{% url 'facture-delete' facture.pk %}">Delete</a>
-    <a href="{% url 'facture-list' %}">Back to List</a>
+    <h2 class="title is-size-2 has-text-centered"> Detail de Facture </h2>
+        <br> <br> <br>
+    <div class="box m-auto" style="width:fit-content;">
+        <h4 class="title is-size-4 has-text-centered"> Ticket N°{{ facture.id }} </h4>
+        <table class="table is-bordered">
+            <tr>
+                <th class="is-info"> Client </th>
+                <td> {{ facture.client }} </td>
+            </tr>
+
+            <tr>
+                <th class="is-info"> Article Name </th>
+                <td>{{ facture.article_name }}</td>
+            </tr>
+
+            <tr>
+                <th class="is-info"> Quantity </th>
+                <td>{{ facture.article_quantity }}</td>
+            </tr>
+
+            <tr>
+                <th class="is-info"> Montant HT </th>
+                <td>{{ facture.ht }}</td>
+            </tr>
+
+            <tr>
+                <th class="is-info"> Montant TTC </th>
+                <td> {{ facture.ttc }}</td>
+            </tr>
+
+            <tr>
+                <th class="is-info"> Date </th>
+                <td>{{ facture.date }}</td>
+            </tr>
+
+            <tr>
+                <th class="is-info"> Status de Paiement </th>
+                <td>{{ facture.paid }}</td>
+            </tr>
+        </table>
+
+        <br>
+        <div class="buttons m-auto" style="width:fit-content;">
+            <a href="{% url 'facture-update' facture.pk %}" class="button is-outlined is-link"> Edit            </a>
+            <a href="{% url 'facture-delete' facture.pk %}" class="button is-outlined is-link"> Delete          </a>
+        </div>
+    </div>
+    
+
+    <a href="{% url 'facture-list' %}" class="button is-outlined is-link">              Back to List    </a>
 {% endblock %}
 
