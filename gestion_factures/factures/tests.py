@@ -15,43 +15,44 @@ class FactureModelTest(TestCase):
 
     def test_facture_creation(self):
         facture = Facture.objects.create(
-            client="John Doe",
-            article_name="Widget",
+            client="Michael",
+            article_name="Table",
             article_quantity=10,
             ttc=100.00,
             ht=80.00,
             date=timezone.now()
         )
-        self.assertEqual(facture.client, "John Doe")
-        self.assertEqual(facture.article_name, "Widget")
+        self.assertEqual(facture.client, "Michael")
+        self.assertEqual(facture.article_name, "Table")
         self.assertEqual(facture.article_quantity, 10)
         self.assertEqual(facture.ttc, 100.00)
         self.assertEqual(facture.ht, 80.00)
+        self.assertEqual(facture.calculMontantTaxe(), 20)
 
     def test_facture_str(self):
         facture = Facture.objects.create(
-            client="Jane Doe",
-            article_name="Gadget",
+            client="Janette",
+            article_name="widget",
             article_quantity=5,
             ttc=50.00,
             ht=40.00,
             date=timezone.now()
         )
-        expected_str = f"Facture {facture.id} - {facture.client} - {facture.ttc}€ en date du: {facture.date}"
+        expected_str = f"Facture {facture.id} - Janette - 50.00€ - en date du: {facture.date}"
         self.assertEqual(str(facture), expected_str)
 
     def test_facture_ordering(self):
         facture1 = Facture.objects.create(
-            client="Alice",
-            article_name="Item A",
+            client="Junior",
+            article_name="obj A",
             article_quantity=1,
             ttc=10.00,
             ht=8.00,
             date=timezone.now()
         )
         facture2 = Facture.objects.create(
-            client="Bob",
-            article_name="Item B",
+            client="Claire",
+            article_name="obj B",
             article_quantity=2,
             ttc=20.00,
             ht=16.00,
@@ -63,8 +64,8 @@ class FactureModelTest(TestCase):
 
     def test_facture_save(self):
         facture = Facture(
-            client="Charlie",
-            article_name="Tool",
+            client="Caddie",
+            article_name="Bonbon",
             article_quantity=3,
             ttc=30.00,
             ht=24.00,
@@ -72,8 +73,8 @@ class FactureModelTest(TestCase):
         )
         facture.save()
         saved_facture = Facture.objects.get(id=facture.id)
-        self.assertEqual(saved_facture.client, "Charlie")
-        self.assertEqual(saved_facture.article_name, "Tool")
+        self.assertEqual(saved_facture.client, "Caddie")
+        self.assertEqual(saved_facture.article_name, "Bonbon")
         self.assertEqual(saved_facture.article_quantity, 3)
         self.assertEqual(saved_facture.ttc, 30.00)
         self.assertEqual(saved_facture.ht, 24.00)

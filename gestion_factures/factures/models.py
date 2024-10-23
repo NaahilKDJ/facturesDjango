@@ -17,5 +17,7 @@ class Facture(models.Model):
     def __str__(self):
         return f"Facture {self.id} - {self.client} - {self.ttc}€ en date du: {self.date}"
 
+    def calculMontantTaxe(self):
+        return (self.ttc-self.ht)
     class Meta:
         ordering = ['-date']  # This will order invoices by date, most recent first
