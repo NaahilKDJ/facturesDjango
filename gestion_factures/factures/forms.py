@@ -32,4 +32,12 @@ class FactureForm(forms.ModelForm):
             raise forms.ValidationError("Veuillez mentionner le nom du client !")
         
         return client
+
+
+class FactureFilterForm(forms.Form):
+    client = forms.CharField(required=False, label='Client')
+    article_name = forms.CharField(required=False, label='Article Name')
+    date_from = forms.DateField(required=False, label='Date From', widget=forms.DateInput(attrs={'type': 'date'}))
+    date_to = forms.DateField(required=False, label='Date To', widget=forms.DateInput(attrs={'type': 'date'}))
+    paid = forms.ChoiceField(required=False, choices=[('', 'All'), ('True', 'Paid'), ('False', 'Unpaid')], label='Payment Status')
     

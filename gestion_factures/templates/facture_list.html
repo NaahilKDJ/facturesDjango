@@ -5,6 +5,16 @@
 <br> <br>
 <div class="box m-auto" style="width:fit-content;">
     <h2 class="title is-size-2 has-text-centered"> Factures List </h2>
+    
+    <form method="get" class="is-flex is-flex-wrap-wrap is-flex-direction-column m-auto" style="width:fit-content;">
+        <div class="is-flex is-flex-wrap-wrap">
+            {{ filter_form.as_p }}
+        </div>
+        <div class="m-auto" style="width:fit-content;">
+            <button type="submit" class="button is-primary">Filter</button>
+        </div>
+    </form>
+    
     <table class="table is-hoverable is-vcentered has-text-centered m-auto">
         <thead>
             <tr>
@@ -31,8 +41,10 @@
                 <td> {{ facture.article_quantity }} </td>
                 <td> {{ facture.ht }} €             </td>
                 <td> {{ facture.ttc }} €            </td>
-                <td> {{ facture.paid }}             </td>
                 <td> {{ facture.date }}             </td>
+                <td> 
+                    {% if facture.paid %} Paid {% else %} Unpaid {% endif %}
+                </td>
                 <td>
                     <a href="{% url 'facture-update' facture.pk %}"> Edit   </a>
                 </td>
