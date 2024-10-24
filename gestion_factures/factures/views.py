@@ -1,13 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView, DetailView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView
+
 from .models import Facture
-from .forms import FactureForm
-from .forms import FactureFilterForm
+from .forms import FactureForm, FactureFilterForm
 
 # Create your views here.
+class SignupView(CreateView):
+    form_class = UserCreationForm
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('login')
 
-class FactureListView(ListView):
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
+
+class FactureListView(LoginRequiredMixin, ListView):
     model = Facture
     template_name = 'facture_list.html'
     context_object_name = 'factures'
@@ -35,23 +46,24 @@ class FactureListView(ListView):
         context['filter_form'] = FactureFilterForm(self.request.GET)
         return context
 
-class FactureCreateView(CreateView):
+class FactureCreateView(LoginRequiredMixin, CreateView):
     model = Facture
     form_class = FactureForm
     template_name = 'facture_form.html'
     success_url = reverse_lazy('facture-list')
-class FactureDetailView(DetailView):
+
+class FactureDetailView(LoginRequiredMixin, DetailView):
     model = Facture
     template_name = 'facture_detail.html'
     context_object_name = 'facture'
 
-class FactureUpdateView(UpdateView):
+class FactureUpdateView(LoginRequiredMixin, UpdateView):
     model = Facture
     form_class = FactureForm
     template_name = 'facture_form.html'
     success_url = reverse_lazy('facture-list')
 
-class FactureDeleteView(DeleteView):
+class FactureDeleteView(LoginRequiredMixin, DeleteView):
     model = Facture
     template_name = 'facture_confirm_delete.html'
     success_url = reverse_lazy('facture-list')

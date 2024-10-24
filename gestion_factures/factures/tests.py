@@ -103,6 +103,7 @@ class FactureListViewTest(TestCase):
     def setUp(self):
         Facture.objects.create(client="John Doe", article_name="Widget", article_quantity=10, ttc=100.00, ht=80.00, date=timezone.now())
         Facture.objects.create(client="Jane Doe", article_name="Gadget", article_quantity=5, ttc=50.00, ht=40.00, date=timezone.now())
+        Facture.objects.create(client="Alice", article_name="Tool", article_quantity=3, ttc=30.00, ht=24.00, date=timezone.now())
 
     def test_view_url_exists_at_desired_location(self):
         response = self.client.get('/factures/')
@@ -111,6 +112,18 @@ class FactureListViewTest(TestCase):
     def test_view_uses_correct_template(self):
         response = self.client.get(reverse('facture-list'))
         self.assertTemplateUsed(response, 'facture_list.html')
+
+    def test_filter_by_client(self):
+        response = self.client.get('/factures/?client=John')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "John Doe")
+        self.assertNotContains(response, "Jane Doe")
+
+    def test_filter_by_article_name(self):
+        response = self.client.get('/factures/?article_name=Tool')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Tool")
+        self.assertNotContains(response, "Widget")
 
 class FactureDetailViewTest(TestCase):
 
@@ -148,5 +161,6 @@ class FactureCreateViewTest(TestCase):
             'date': timezone.now()
         })
         self.assertEqual(response.status_code, 200)  # Redirect after successful creation
+
 
 
